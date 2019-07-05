@@ -1,0 +1,190 @@
+#!/usr/bin/perl
+
+sub getIndent {
+	my ($l) = @_;
+
+	$l =~ m/^(\s+)/;
+	return length ($1);
+}
+
+sub printBlock {
+	$CODE_BLOCK =~ s/<\/B><B>//g;
+	$CODE_BLOCK =~ s/<\/I><I>//g;
+	$CODE_BLOCK =~ s/=/<span class="oper">=<\/span>/g;
+	$CODE_BLOCK =~ s/\(/<span class="oper">(<\/span>/g;
+	$CODE_BLOCK =~ s/\)/<span class="oper">)<\/span>/g;
+	$CODE_BLOCK =~ s/\$/<span class="oper">\$<\/span>/g;
+
+	print ("<CODE>\n");
+	print ("$CODE_BLOCK");
+	print ("</CODE>\n");
+	$CODE_BLOCK = "";
+}
+
+$COLUMNS=90;
+if ($ARGV[0] =~ m/^(.*?)\/(.*?)$/ || $ARGV[0] =~ m/^(.*?)\((.*?)\)$/) {
+	$CMD="man $2 $1";
+	$COMMAND="$1";
+	$SECTION=$2;
+}
+else {
+	$CMD="man $ARGV[0]";
+	$COMMAND="$ARGV[0]";
+	$SECTION=1;
+}
+
+$MANCGI="lc://lookup?APP_KEYWORDS=man&text=";
+
+$STYLE = <<END;
+	<HTML>
+	<HEAD>
+  <TITLE>UNIX man pages : $COMMAND ($SECTION)</TITLE>
+	</HEAD>
+	<style type="text/css">
+body {
+	padding-left: 20px;
+	color: black;
+	background-color: white;
+}
+.oper {
+	color:gray;
+}
+b {
+        color: brown;
+				font-weight: bold;
+}
+i {
+        color: gray;
+				text-decoration: underline;
+        font-style: normal;
+}
+a {
+        color: #990000;
+        font-style: bold;
+}
+
+p {
+        margin: 25px;
+}
+dl {
+	padding-left: 25px;
+}
+dd {
+	padding-left: 25px;
+}
+pre {
+	font-family: Monaco, monospace;
+	font-size: 12px;
+}
+code {
+	margin-left: 20px;
+	width: 600px;
+	display: block;
+	background-color: lightgray;
+	font-family: Monaco, monospace;
+	font-size: 10px;
+}
+code b {
+        color: #990000;
+				font-weight: normal;
+}
+
+	</style>
+END
+
+print ("$STYLE<PRE>\n");
+
+$CODE_BLOCK = "";
+$LAST_SECTION = "";
+$LAST_LINE = "";
+$SPACER = -1;
+$LINES = 0;
+
+open (MAN, "PATH=/opt/local/bin:/usr/local/bin:/usr/bin:/bin COLUMNS=$COLUMNS $CMD |");
+while (<MAN>) {
+	chomp ();
+	$l = $_;
+	$l =~ s/\s*$//;
+	#print ("$l\n");
+
+	if (m/^(([A-Z][A-Z]?)+)$/) {
+		$l = $1;
+		$l =~ s/.//g;
+
+		printBlock () if ($CODE_BLOCK ne "");
+
+		print ("<H1>$l</H1>\n");
+		$LAST_SECTION = $l;
+		$LAST_LINE = $l;
+		next;
+	}
+	elsif (m/^([A-Z].*)$/) {
+		$l = $1;
+		$l =~ s/.//g;
+
+		printBlock () if ($CODE_BLOCK ne "");
+
+		print ("<H3>$l</H3><HR/>\n");
+		$LAST_SECTION = $l;
+		$LAST_LINE = $l;
+		next;
+	}
+
+	$l =~ s/>//g;
+	$l =~ s/<//g;
+
+	$l =~ s/_(.)(.)/<I><B>\1<\/B><\/I>/g;
+	$l =~ s/_(.)/<I>\1<\/I>/g;
+	$l =~ s/(.)(.)/<B>\1<\/B>/g;
+	$l =~ s/``(.*?)''/<B>"\1"<\/B>/g;
+	$l =~ s/''(.*?)''/<B>"\1"<\/B>/g;
+	$l =~ s/`(.*?)'/<B>'\1'<\/B>/g;
+	$l =~ s/'(.*?)'/<B>'\1'<\/B>/g;
+	$l =~ s/"(.*?)"/<B>'\1'<\/B>/g;
+	$l =~ s/ ([A-Z][A-Z0-9_]+)[\. ]/<B> \1 <\/B>/g;
+
+	$l =~ s//\&gt;/g;
+	$l =~ s//\&lt;/g;
+
+	if ($LAST_SECTION eq "NAME" && $SPACER == -1 && $l !~ /^\s*$/) {
+		$SPACER = getIndent ($l);
+	}
+	elsif ($SPACER > 0 && getIndent ($l) > $SPACER && ($LAST_LINE eq "" || getIndent ($LAST_LINE) == 0)) {
+		$CODE_BLOCK .= "$l\n";
+		next;
+	}
+
+	if ($CODE_BLOCK ne "") {
+		if ($l eq "") {
+			$CODE_BLOCK .= "\n";
+			next;
+		}
+		printBlock () if ($CODE_BLOCK ne "");
+	}
+
+	$l =~ s/<\/B><B>//g;
+	$l =~ s/<\/I><I>//g;
+
+	$l =~ s/<B>([0-9A-z][-.,0-9A-z:]*)<\/B>\(([1-9][A-z]*)\)/<A HREF="$MANCGI\1\/\2">\1(\2)<\/A>/g;
+	$l =~ s/<I>([0-9A-z][-.,0-9A-z:]*)<\/I>\(([1-9][A-z]*)\)/<A HREF="$MANCGI\1\/\2">\1(\2)<\/A>/g;
+	$l =~ s/([0-9A-z][-.,0-9A-z:]*)\(([1-9][A-z]*)\)/<A HREF="$MANCGI\1\/\2">\1(\2)<\/A>/g;
+	$l =~ s/\b(https?:\/\/[-\w\.\/]+)\b/<A HREF="\1">\1<\/A>/g;
+
+	$l =~ s/(\s)([A-Z][A-Za-z]+(::[A-Za-z][a-z]+)+?)(\s)/\1<A HREF="$MANCGI\2">\2<\/A>\4/g;
+
+	if ($l eq "" && $LAST_LINE eq "") {
+		next;
+	}
+
+	print ("$l\n");
+	$LAST_LINE = $l;
+	$LINES++;
+}
+
+if ($LINES == 0) {
+	print("Manual page not found?");
+}
+
+close (MAN);
+
+print ("</PRE></HTML></BODY>\n");

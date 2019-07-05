@@ -1,0 +1,49 @@
+#!/usr/bin/perl
+
+# WARNING: you have to make this script executable
+# for example 'chmod 0755 ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser/MyScript.txt'
+#
+# this script will get all URL 'variables' passed to the STDIN in format KEY="value"
+# the variables may include:
+#
+#   URL          => my-http://myhost.domain.com:8080/mysite/a.html?search=blah#myanchor
+#   URL_SCHEME   => my-http
+#   URL_HOST     => myhost.domain.com
+#   URL_PORT     => 8080
+#   URL_QUERY    => ?search=blah
+#   URL_PATH     => /mysite/a.html
+#   URL_FRAGMENT => #myanchor
+#   URL_VALUE    => everything that comes after the 'scheme:'
+#   URL_B64VALUE => the same as URL_VALUE but decoded using based64
+#
+#   TEXT         => the selected text used for a lookup
+#
+# NOTE: The system env variable (e.g. PATH) may have different values
+# then what you would expect from executing this script in the Terminal.
+#
+# ---
+#
+# you should exit with 0, this means the handler has finished successfully
+# non-zero value indicates an error
+
+$TEXT = "";
+
+while (<STDIN>) {
+	chomp();
+	if (m/^TEXT=(.*)$/) {
+		$TEXT=$1;
+	}
+}
+
+if ($TEXT =~ m/(\/[a-zA-Z0-9_\/\-\.]+):(\d+)/) {
+	system ('open', "mvim://open?url=file://$1&line=$2") if (-f $1 || -d $1);
+	exit 0;
+}
+
+$FILE = glob($TEXT);
+if (-f $FILE || -d $FILE) {
+	system ('open', $FILE) ;
+	exit 0;
+}
+
+exit 1;
