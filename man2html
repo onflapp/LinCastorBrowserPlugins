@@ -45,6 +45,7 @@ body {
 	padding-left: 20px;
 	color: black;
 	background-color: white;
+  text-align: center;
 }
 .oper {
 	color:gray;
@@ -75,6 +76,8 @@ dd {
 pre {
 	font-family: Monaco, monospace;
 	font-size: 12px;
+  text-align: left;
+  display: inline-block;
 }
 code {
 	margin-left: 20px;
