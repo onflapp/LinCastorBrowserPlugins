@@ -17,6 +17,6 @@ cp ./LinCastorBrowserPlugins/* ~/Library/Application\ Scripts/com.onflapp.LinCas
 
 ## Download and install zipped plugins
 
-1. [download zip archive](https://github.com/onflapp/LinCastorBrowserPlugins/raw/master/Plugins.zip) and unzip it into a directory
+1. [download zip archive](https://github.com/onflapp/LinCastorBrowserPlugins/archive/master.zip) and unzip it into a directory
 2. open scripts folder (Go to LinCastor Browser's **Help / Scripts Folder** menu)
 3. copy __contents__ of the zip archive to the scripts folder
