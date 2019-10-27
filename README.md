@@ -7,12 +7,12 @@ The URL handler plugins are usually used to open browsers or apps, whereas the t
 
 This repository includes plugins you can use "out of the box" or as a starting point for creating your own plugins.
 
-The plugins must be placed into app's "Application Scripts" folder.
+The plugins must be placed into app's "Application Scripts" folder **~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser**. Go to LinCastor Browser's **Help/Scripts Folder** or use Finder's **Go/Go to Folder...** menu.
 
 ## Install plugins using GIT
 ```
 git clone https://github.com/onflapp/LinCastorBrowserPlugins.git
-cp ./LinCastorBrowserPlugins/* ~/Application\ Scripts/com.onflapp.LinCastor-Browser
+cp ./LinCastorBrowserPlugins/* ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser
 ```
 
 ## Download and install zipped plugins
