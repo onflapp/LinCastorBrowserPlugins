@@ -20,17 +20,3 @@ cp ./LinCastorBrowserPlugins/* ~/Application\ Scripts/com.onflapp.LinCastor-Brow
 1. download zip archive and unzip it into a directory
 2. open scripts folder
 3. copy contents of the zip archive to the scripts folder
-
-## Working with selected text:
-
-### AppleDictionary.scpt
-
-Open selected text in Apple Directory app
-
-### AppleMaps.scpt
-
-Open selected text in Apple Maps
-
-### DocumentBrowser.scpt
-
-Search selected text in Google and opens the result in a web panel
