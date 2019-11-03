@@ -20,3 +20,7 @@ cp ./LinCastorBrowserPlugins/* ~/Library/Application\ Scripts/com.onflapp.LinCas
 1. [download zip archive](https://github.com/onflapp/LinCastorBrowserPlugins/archive/master.zip) and unzip it into a directory
 2. open scripts folder (Go to LinCastor Browser's **Help / Scripts Folder** menu)
 3. copy __contents__ of the zip archive to the scripts folder
+
+## Create new plugin
+
+A LinCastor Browser plugin is rather simple AppleScript, shell script or Automator file. The plugins are intended to be changed and modified by users. For more information see https://onflapp.github.io/LinCastorBrowserPlugins/.
