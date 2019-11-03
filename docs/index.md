@@ -49,6 +49,12 @@ TEXT => the selected text used for a lookup
 ENCODED_TEXT => the selected text encoded using url encoding
 ```
 
+# Support for shell scripts and Automator workflow
+
+Besides AppleScript, LinCastor browser supports [shell script or workflow plugins](https://github.com/onflapp/LinCastorBrowserPlugins/tree/master/script_templates).
+
+Shell script will receive the URL as first command line parameter, with rest of the variables passed though STDIN. For bash/zsh you can simply do `eval cat` to make these variables available to your script. Other scripts like perl, python or nodejs will have to parse the STDIN on their own. 
+
 # Where do I find the Scripts folder?
 
 The scripts folder is under your home folder **Library/Application Scripts/com.onflapp.LinCastor-Browser**
