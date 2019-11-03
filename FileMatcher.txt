@@ -26,12 +26,17 @@
 # you should exit with 0, this means the handler has finished successfully
 # non-zero value indicates an error
 
+$HOME = $ENV{'HOME'};
 $TEXT = "";
+$APP_ID = "";
 
 while (<STDIN>) {
 	chomp();
 	if (m/^TEXT=(.*)$/) {
 		$TEXT=$1;
+	}
+	elsif (m/^TAPP_ID=(.*)$/) {
+		$APP_ID=$1;
 	}
 }
 
@@ -44,6 +49,22 @@ $FILE = glob($TEXT);
 if (-f $FILE || -d $FILE) {
 	system ('open', $FILE) ;
 	exit 0;
+}
+
+$CURRENT_PATH=`osascript "$HOME/Library/Application Scripts/com.onflapp.LinCastor-Browser/GetPathToFrontmostDocument.scpt" "$APP_ID" `;
+chomp($CURRENT_PATH);
+
+system("echo '$TEXT' > /tmp/x");
+
+if ($CURRENT_PATH ne "") {
+	if (-f "$CURRENT_PATH/$FILE" || -d "CURRENT_PATH/$FILE") {
+		system ('open', "$CURRENT_PATH/$FILE") ;
+		exit 0;
+	}
+	elsif (-f "$CURRENT_PATH/../$FILE" || -d "CURRENT_PATH/../$FILE") {
+		system ('open', "$CURRENT_PATH/../$FILE") ;
+		exit 0;
+	}
 }
 
 exit 1;
