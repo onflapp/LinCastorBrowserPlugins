@@ -32,7 +32,7 @@ $APP_ID = "";
 
 while (<STDIN>) {
 	chomp();
-	if (m/^TEXT=(.*)$/) {
+	if (m/^TEXT='(.*?)'$/) {
 		$TEXT=$1;
 	}
 	elsif (m/^TAPP_ID=(.*)$/) {
