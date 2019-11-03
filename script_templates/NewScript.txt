@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# WARNING: you have to make this script executable and save it to your Scripts folder
+# for example 'chmod 0755 ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser/MyScript.txt'
+#
+# the first argument is going to be the URL
+#
+# all other URL 'variables' will be passed to the STDIN in format KEY='value'
+# the variables may include:
+#
+#   URL           => my-http://myhost.domain.com:8080/mysite/a.html?search=blah#myanchor
+#   URL_SCHEME    => my-http
+#   URL_HOST      => myhost.domain.com
+#   URL_PORT      => 8080
+#   URL_QUERY     => ?search=blah
+#   URL_PATH      => /mysite/a.html
+#   URL_PATH_EXT  => html
+#   URL_PATH_NAME => a.html
+#   URL_FRAGMENT  => #myanchor
+#   URL_VALUE     => everything that comes after the 'scheme:'
+#   URL_B64VALUE  => the same as URL_VALUE but decoded using based64
+#
+#   TEXT          => the selected text used for a lookup
+#   ENCODED_TEXT  => the selected text encoded using url encoding
+#
+# NOTE: The system env variable (e.g. PATH) may have different values
+# then what you would expect from executing this script in the Terminal.
+#
+# ---
+#
+# you should exit with 0, this means the handler has finished successfully
+# non-zero value indicates an error
+
+
+# to parse the key/value pairs and create variables we can use eval
+eval `cat`
+
+# execute command
+open -a Safari "$1"
+
+exit 0

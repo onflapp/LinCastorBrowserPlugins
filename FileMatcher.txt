@@ -30,7 +30,7 @@ $TEXT = "";
 
 while (<STDIN>) {
 	chomp();
-	if (m/^TEXT=(.*)$/) {
+	if (m/^TEXT='(.*?)'$/) {
 		$TEXT=$1;
 	}
 }
