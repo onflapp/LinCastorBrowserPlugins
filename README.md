@@ -12,7 +12,7 @@ The plugins must be placed into app's "Application Scripts" folder **~/Library/A
 ## Install plugins using GIT
 ```
 git clone https://github.com/onflapp/LinCastorBrowserPlugins.git
-cp ./LinCastorBrowserPlugins/* ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser
+cp -r ./LinCastorBrowserPlugins/* ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser
 ```
 
 ## Download and install zipped plugins

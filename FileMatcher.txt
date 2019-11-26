@@ -35,7 +35,7 @@ while (<STDIN>) {
 	if (m/^TEXT='(.*?)'$/) {
 		$TEXT=$1;
 	}
-	elsif (m/^TAPP_ID=(.*)$/) {
+	elsif (m/^APP_ID='(.*)'$/) {
 		$APP_ID=$1;
 	}
 }
@@ -53,8 +53,6 @@ if (-f $FILE || -d $FILE) {
 
 $CURRENT_PATH=`osascript "$HOME/Library/Application Scripts/com.onflapp.LinCastor-Browser/GetPathToFrontmostDocument.scpt" "$APP_ID" `;
 chomp($CURRENT_PATH);
-
-system("echo '$TEXT' > /tmp/x");
 
 if ($CURRENT_PATH ne "") {
 	if (-f "$CURRENT_PATH/$FILE" || -d "CURRENT_PATH/$FILE") {
