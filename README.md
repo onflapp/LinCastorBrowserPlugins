@@ -24,3 +24,13 @@ cp -r ./LinCastorBrowserPlugins/* ~/Library/Application\ Scripts/com.onflapp.Lin
 ## Create new plugin
 
 A LinCastor Browser plugin is rather simple AppleScript, shell script or Automator file. The plugins are intended to be changed and modified by users. For more information see https://onflapp.github.io/LinCastorBrowserPlugins/.
+
+## Troubleshooting
+
+Most of these plugins require _Accessibility_ permissions to function correctly. To enable these permissions do the following:
+
+- open **Security and Privacy** preferences
+- make sure LinCastor Browser is enabled in the **Accessibility** section
+- **Automation** should be enabled for MacOS 10.15
+
+If you still have experience problems, try to remove the app and add it again.
