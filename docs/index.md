@@ -1,6 +1,6 @@
 # Create new plugin
 
-You can either use **Plugin Registration** dialog to create new plugin from a template. The dialog will create a temporary, read-only file that will have to be save or copied into the **Scripts folder**. This is quite important, otherwise MacOS may refuse to run the script.
+You can either use **Plugin Registration** dialog to create new plugin from a template. The dialog will create a temporary, read-only file that will have to be saved or copied into the **Scripts folder**. This is quite important, otherwise MacOS may refuse to run the script.
 
 Downloading and modifying one of the [sample plugins](https://github.com/onflapp/LinCastorBrowserPlugins) is good way to start start as well.
 
