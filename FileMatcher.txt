@@ -38,6 +38,9 @@ while (<STDIN>) {
 	elsif (m/^APP_ID='(.*)'$/) {
 		$APP_ID=$1;
 	}
+	elsif (m/^URL_PATH='(.*)'$/) {
+		$TEXT=$1;
+	}
 }
 
 if ($TEXT =~ m/(\/[a-zA-Z0-9_\/\-\.]+):(\d+)/) {
@@ -46,23 +49,35 @@ if ($TEXT =~ m/(\/[a-zA-Z0-9_\/\-\.]+):(\d+)/) {
 }
 
 $FILE = glob($TEXT);
-if (-f $FILE || -d $FILE) {
+if (-e $FILE) {
 	system ('open', $FILE) ;
 	exit 0;
 }
 
-$CURRENT_PATH=`osascript "$HOME/Library/Application Scripts/com.onflapp.LinCastor-Browser/GetPathToFrontmostDocument.scpt" "$APP_ID" `;
+if ($TEXT =~ /^\//) {
+  $TEXT = substr($TEXT, 1);
+}
+
+#$CURRENT_PATH=`osascript "$HOME/Library/Application Scripts/com.onflapp.LinCastor-Browser/GetPathToFrontmostDocument.scpt" "$APP_ID" `;
 chomp($CURRENT_PATH);
 
 if ($CURRENT_PATH ne "") {
-	if (-f "$CURRENT_PATH/$FILE" || -d "CURRENT_PATH/$FILE") {
+	if (-e "$CURRENT_PATH/$FILE" || -d "CURRENT_PATH/$FILE") {
 		system ('open', "$CURRENT_PATH/$FILE") ;
 		exit 0;
 	}
-	elsif (-f "$CURRENT_PATH/../$FILE" || -d "CURRENT_PATH/../$FILE") {
+	elsif (-e "$CURRENT_PATH/../$FILE" || -d "CURRENT_PATH/../$FILE") {
 		system ('open', "$CURRENT_PATH/../$FILE") ;
 		exit 0;
 	}
+}
+else {
+  $FILE = `mdfind -name "$TEXT" | head -1`;
+  chomp($FILE);
+  if (-e "$FILE") {
+		system ('open', "$FILE") ;
+		exit 0;
+  }
 }
 
 exit 1;
