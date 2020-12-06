@@ -1,3 +1,7 @@
+# LinCastor Browser
+
+[LinCastor Browser](https://onflapp.github.io/blog/pages/LinCastorBrowser.html?utm_source=git) is an app that lets you choose a browser you want to open a link with. It works by becoming your default browser. When you click on a link it opens up with a menu and let you choose what action you want to take. Action can be an application or plugin script.
+
 # LinCastorBrowserPlugins
 
 Useful plugins and samples for [LinCastor Browser](https://onflapp.github.io/blog/pages/LinCastorBrowser.html?utm_source=git) app.
@@ -23,7 +27,7 @@ cp -r ./LinCastorBrowserPlugins/* ~/Library/Application\ Scripts/com.onflapp.Lin
 
 ## Create new plugin
 
-A LinCastor Browser plugin is rather simple AppleScript, shell script or Automator file. The plugins are intended to be changed and modified by users. For more information see https://onflapp.github.io/LinCastorBrowserPlugins/.
+A LinCastor Browser plugin is rather simple AppleScript, shell script or Automator file. The plugins are intended to be changed and modified by users. Description how to [create new plugin](https://onflapp.github.io/LinCastorBrowserPlugins/).
 
 ## Troubleshooting
 
