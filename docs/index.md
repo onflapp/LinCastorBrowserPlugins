@@ -20,17 +20,18 @@ The **args** record will contain different set of variable depending on whether 
 ### handling URL
 
 ```
-URL           => my-http://myhost.domain.com:8080/mysite/a.html?search=blah#myanchor
-URL_SCHEME    => my-http
-URL_HOST      => myhost.domain.com
-URL_PORT      => 8080
-URL_PATH      => /mysite/a.html
-URL_PATH_EXT  => html
-URL_PATH_NAME => a.html
-URL_QUERY     => ?search=blah
-URL_FRAGMENT  => #myanchor
-URL_VALUE     => everything that comes after the 'scheme:'
-URL_B64VALUE  => the same as URL_VALUE but decoded using based64
+URL             => my-http://myhost.domain.com:8080/mysite/a.html?search=blah#myanchor
+URL_SCHEME      => my-http
+URL_HOST        => myhost.domain.com
+URL_PORT        => 8080
+URL_PATH        => /mysite/a.html
+URL_PATH_EXT    => html
+URL_PATH_NOEXT  => a
+URL_PATH_NAME   => a.html
+URL_QUERY       => ?search=blah
+URL_FRAGMENT    => #myanchor
+URL_VALUE       => myhost.domain.com:8080/mysite/a.html?search=blah#myanchor
+URL_B64VALUE    => the same as URL_VALUE but decoded using based64
 ```
 
 URL query parameters (everything that comes after ?) is going to be expanded into variables. For example:

@@ -38,7 +38,7 @@ while (<STDIN>) {
 	elsif (m/^APP_ID='(.*)'$/) {
 		$APP_ID=$1;
 	}
-	elsif (m/^URL_PATH='(.*)'$/) {
+	elsif (m/^URL_PATH_NAME='(.*)'$/) {
 		$TEXT=$1;
 	}
 }
@@ -48,7 +48,10 @@ if ($TEXT =~ m/(\/[a-zA-Z0-9_\/\-\.]+):(\d+)/) {
 	exit 0;
 }
 
-$FILE = glob($TEXT);
+$FILE = $TEXT;
+$FILE =~ s/~/$HOME/;
+$FILE =~ s/\\//g;
+
 if (-e $FILE) {
 	system ('open', $FILE) ;
 	exit 0;
