@@ -1,6 +1,6 @@
 # LinCastorBrowserPlugins
 
-Useful plugins and samples for LinCastor Browser app.
+Useful plugins and samples for [LinCastor Browser](https://onflapp.github.io/blog/pages/LinCastorBrowser.html?utm_source=git) app.
 
 There are two types of plugins; one that handles URLs (including custom schemes) and the other that uses currently selected text.
 The URL handler plugins are usually used to open browsers or apps, whereas the text selection plugins do text lookups.
