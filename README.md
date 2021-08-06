@@ -2,18 +2,17 @@
 
 [LinCastor Browser](https://onflapp.github.io/blog/pages/LinCastorBrowser.html?utm_source=git) is an app that lets you choose a browser you want to open a link with. It works by becoming your default browser. When you click on a link it opens up with a menu and let you choose what action you want to take. Action can be an application or plugin script.
 
-# LinCastorBrowserPlugins
+## LinCastorBrowserPlugins
 
 Useful plugins and samples for [LinCastor Browser](https://onflapp.github.io/blog/pages/LinCastorBrowser.html?utm_source=git) app.
 
-There are two types of plugins; one that handles URLs (including custom schemes) and the other that uses currently selected text.
-The URL handler plugins are usually used to open browsers or apps, whereas the text selection plugins do text lookups.
+# Download and install zipped plugins
 
-This repository includes plugins you can use "out of the box" or as a starting point for creating your own plugins.
+1. [download zip archive](https://github.com/onflapp/LinCastorBrowserPlugins/archive/master.zip) and unzip it into a directory
+2. open scripts folder (Go to LinCastor Browser's **Help / Scripts Folder** menu)
+3. copy __contents__ of the zip archive to the scripts folder
 
-The plugins must be placed into app's "Application Scripts" folder **~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser**.
-
-## Install plugins using GIT
+## Install plugins directly from GIT
 
 ```
 git clone https://github.com/onflapp/LinCastorBrowserPlugins.git
@@ -21,13 +20,14 @@ cp -r ./LinCastorBrowserPlugins/*    ~/Library/Application\ Scripts/com.onflapp.
 cp -r ./LinCastorBrowserPlugins/.git ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser
 ```
 
-## Download and install zipped plugins
-
-1. [download zip archive](https://github.com/onflapp/LinCastorBrowserPlugins/archive/master.zip) and unzip it into a directory
-2. open scripts folder (Go to LinCastor Browser's **Help / Scripts Folder** menu)
-3. copy __contents__ of the zip archive to the scripts folder
-
 ## Create new plugin
+
+There are two types of plugins; one that handles URLs (including custom schemes) and the other that uses currently selected text.
+The URL handler plugins are usually used to open browsers or apps, whereas the text selection plugins do text lookups.
+
+This repository includes plugins you can use "out of the box" or as a starting point for creating your own plugins.
+
+The plugins must be placed into app's "Application Scripts" folder **~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser**.
 
 A LinCastor Browser plugin is rather simple AppleScript, shell script or Automator file. The plugins are intended to be changed and modified by users. Description how to [create new plugin](https://onflapp.github.io/LinCastorBrowserPlugins/).
 
