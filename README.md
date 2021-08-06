@@ -14,9 +14,11 @@ This repository includes plugins you can use "out of the box" or as a starting p
 The plugins must be placed into app's "Application Scripts" folder **~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser**.
 
 ## Install plugins using GIT
+
 ```
 git clone https://github.com/onflapp/LinCastorBrowserPlugins.git
-cp -r ./LinCastorBrowserPlugins/* ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser
+cp -r ./LinCastorBrowserPlugins/*    ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser
+cp -r ./LinCastorBrowserPlugins/.git ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser
 ```
 
 ## Download and install zipped plugins
