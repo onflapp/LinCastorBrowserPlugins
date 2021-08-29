@@ -30,6 +30,13 @@ $HOME = $ENV{'HOME'};
 $TEXT = "";
 $APP_ID = "";
 
+sub open_or_reveal {
+  my ($f) = @_;
+	if (system ('open', $f) != 0) {
+    system ('open', '-R', $f);
+  }
+}
+
 while (<STDIN>) {
 	chomp();
 	if (m/^TEXT='(.*?)'$/) {
@@ -41,10 +48,17 @@ while (<STDIN>) {
 	elsif (m/^URL_PATH_NAME='(.*)'$/) {
 		$TEXT=$1;
 	}
+  elsif (m/^URL_PATH='(.*)'$/) {
+    $TEXT=$1;
+  }
 }
 
-if ($TEXT =~ m/(\/[a-zA-Z0-9_\/\-\.]+):(\d+)/) {
-	system ('open', "mvim://open?url=file://$1&line=$2") if (-f $1 || -d $1);
+if ($TEXT =~ m/^file:\/\/(.*)$/) {
+  open_or_reveal($1);
+  exit 0;
+}
+elsif ($TEXT =~ m/(\/[a-zA-Z0-9_\/\-\.]+):(\d+)/) {
+	open_or_reveal ("mvim://open?url=file://$1&line=$2") if (-f $1 || -d $1);
 	exit 0;
 }
 
@@ -53,7 +67,7 @@ $FILE =~ s/~/$HOME/;
 $FILE =~ s/\\//g;
 
 if (-e $FILE) {
-	system ('open', $FILE) ;
+	open_or_reveal ($FILE) ;
 	exit 0;
 }
 
@@ -66,11 +80,11 @@ chomp($CURRENT_PATH);
 
 if ($CURRENT_PATH ne "") {
 	if (-e "$CURRENT_PATH/$FILE" || -d "CURRENT_PATH/$FILE") {
-		system ('open', "$CURRENT_PATH/$FILE") ;
+		open_or_reveal ("$CURRENT_PATH/$FILE") ;
 		exit 0;
 	}
 	elsif (-e "$CURRENT_PATH/../$FILE" || -d "CURRENT_PATH/../$FILE") {
-		system ('open', "$CURRENT_PATH/../$FILE") ;
+		open_or_reveal ("$CURRENT_PATH/../$FILE") ;
 		exit 0;
 	}
 }
@@ -78,7 +92,7 @@ else {
   $FILE = `mdfind -name "$TEXT" | head -1`;
   chomp($FILE);
   if (-e "$FILE") {
-		system ('open', "$FILE") ;
+		open_or_reveal ($FILE) ;
 		exit 0;
   }
 }
