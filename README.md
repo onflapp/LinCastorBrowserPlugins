@@ -11,9 +11,8 @@
 ## Install plugins directly from GIT
 
 ```
-git clone https://github.com/onflapp/LinCastorBrowserPlugins.git
-cp -r ./LinCastorBrowserPlugins/*    ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser
-cp -r ./LinCastorBrowserPlugins/.git ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser
+cd ~/Library/Application\ Scripts/com.onflapp.LinCastor-Browser
+git clone https://github.com/onflapp/LinCastorBrowserPlugins.git .
 ```
 
 ## Create new plugin
