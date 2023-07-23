@@ -35,3 +35,4 @@ Most of these plugins require _Accessibility_ permissions to function correctly.
 - **Automation** should be enabled for MacOS 10.15
 
 If you still have experience problems, try to remove the app and add it again.
+
